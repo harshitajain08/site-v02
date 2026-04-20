@@ -1,52 +1,53 @@
 import { motion } from 'framer-motion'
 
+const codeLines = [
+  { token: 'export const brand = {', tone: 'text-cyan-300' },
+  { token: "  name: 'JustAsk',", tone: 'text-emerald-300' },
+  { token: "  mode: 'premium-dark',", tone: 'text-fuchsia-300' },
+  { token: "  assets: ['web', 'ads', 'flyers', 'invites'],", tone: 'text-sky-300' },
+  { token: '}', tone: 'text-cyan-300' },
+  { token: 'pipeline.deploy({ speed: `24h` })', tone: 'text-violet-200' },
+]
+
 export default function CodeMockup() {
-  const codeLines = [
-    { text: 'export default function Hero() {', color: 'text-cyan-400' },
-    { text: '  const [isLoading, setIsLoading] = useState(false)', color: 'text-emerald-400' },
-    { text: '  const { scrollProgress } = useScroll()', color: 'text-emerald-400' },
-    { text: '  ', color: '' },
-    { text: '  return (', color: 'text-cyan-400' },
-    { text: '    <motion.div animate={{...}} />', color: 'text-pink-400' },
-    { text: '  )', color: 'text-cyan-400' },
-    { text: '}', color: 'text-cyan-400' },
-  ]
-
   return (
-    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 backdrop-blur-xl shadow-2xl overflow-hidden">
-      {/* Editor header */}
-      <div className="h-12 bg-gradient-to-r from-white/5 to-white/[0.02] border-b border-white/10 px-4 flex items-center gap-2">
-        <div className="text-xs text-white/60 font-mono">Hero.tsx</div>
-        <div className="ml-auto text-xs text-white/40">Ln 42, Col 8</div>
-      </div>
-
-      {/* Code content */}
-      <div className="h-full bg-gradient-to-b from-slate-950/40 via-slate-900/20 to-transparent p-6 overflow-hidden font-mono text-sm">
-        <div className="space-y-1">
-          {codeLines.map((line, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="flex items-center gap-3"
-            >
-              <span className="text-white/30 select-none w-6 text-right">{String(index + 1).padStart(2, ' ')}</span>
-              <span className={`${line.color || 'text-white/60'}`}>{line.text}</span>
-            </motion.div>
-          ))}
+    <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/15 bg-[#0a0e1b]/95 shadow-[0_28px_60px_-30px_rgba(0,0,0,0.95)]">
+      <div className="flex h-10 items-center gap-2 border-b border-white/10 bg-[#10162b] px-3">
+        <span className="h-2.5 w-2.5 rounded-full bg-rose-400/90" />
+        <span className="h-2.5 w-2.5 rounded-full bg-amber-300/90" />
+        <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/90" />
+        <div className="ml-2 rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-white/70">justask.config.ts</div>
+        <div className="ml-auto rounded-full border border-emerald-300/35 bg-emerald-500/15 px-2 py-0.5 text-[9px] uppercase tracking-wide text-emerald-200">
+          live
         </div>
-
-        {/* Syntax highlighting accent */}
-        <motion.div
-          animate={{
-            opacity: [0.3, 0.6, 0.3],
-            width: ['20%', '100%', '20%'],
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-        />
       </div>
+
+      <div className="relative space-y-1 p-3 font-mono text-[10px] sm:text-[11px]">
+        {codeLines.map((line, index) => (
+          <motion.div
+            key={`${line.token}-${index}`}
+            initial={{ opacity: 0, x: -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.35, delay: index * 0.07 }}
+            className="flex items-center gap-3"
+          >
+            <span className="w-4 text-right text-white/35">{index + 1}</span>
+            <span className={line.tone}>{line.token}</span>
+          </motion.div>
+        ))}
+
+        <div className="mt-3 grid grid-cols-3 gap-2 border-t border-white/10 pt-2 text-[9px] text-white/60">
+          <span className="rounded-md border border-white/10 bg-white/5 px-1.5 py-1">build: clean</span>
+          <span className="rounded-md border border-white/10 bg-white/5 px-1.5 py-1">preview: synced</span>
+          <span className="rounded-md border border-cyan-400/30 bg-cyan-500/10 px-1.5 py-1 text-cyan-100">deploy: ready</span>
+        </div>
+      </div>
+
+      <motion.div
+        animate={{ opacity: [0.35, 0.8, 0.35], x: ['-20%', '110%'] }}
+        transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
+        className="pointer-events-none absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-cyan-200/10 to-transparent"
+      />
     </div>
   )
 }

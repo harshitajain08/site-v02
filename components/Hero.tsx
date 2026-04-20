@@ -1,8 +1,14 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Code2, Palette, Globe } from 'lucide-react'
+import { ArrowRight, Mouse, Sparkles } from 'lucide-react'
+
+import CreativeAssetsMockup from '@/components/mockups/CreativeAssetsMockup'
+import CodeMockup from '@/components/mockups/CodeMockup'
+import WebsiteMockup from '@/components/mockups/WebsiteMockup'
 import { Button } from '@/components/ui/button'
+
+const serviceChips = ['Website', 'Ads', 'Flyers', 'Invites', 'Brand Kit', 'Social Creatives']
 
 export default function Hero() {
   const containerVariants = {
@@ -10,190 +16,156 @@ export default function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1,
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
+      transition: { duration: 0.65, ease: 'easeOut' },
     },
   }
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-background">
-      {/* Gradient orbs background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-gradient-to-br from-indigo-600/20 to-transparent rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-gradient-to-br from-pink-600/20 to-transparent rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-gradient-to-br from-purple-600/10 to-transparent rounded-full blur-3xl" />
+    <section className="relative min-h-screen w-full overflow-x-clip bg-background pt-24 sm:pt-28">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -left-32 top-20 h-[420px] w-[420px] rounded-full bg-indigo-500/20 blur-[110px]" />
+        <div className="absolute right-0 top-10 h-[360px] w-[360px] rounded-full bg-fuchsia-500/15 blur-[110px]" />
+        <div className="absolute bottom-0 left-1/3 h-[340px] w-[340px] rounded-full bg-cyan-500/10 blur-[100px]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[calc(100vh-160px)]">
-          {/* Left content */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="space-y-8 max-w-xl"
-          >
-            {/* Badge */}
+      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-7rem)] w-full max-w-7xl items-center px-4 pb-16 sm:px-6 lg:px-8">
+        <div className="grid w-full grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
+          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="max-w-xl space-y-7">
             <motion.div variants={itemVariants}>
-              <div className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30 backdrop-blur">
-                <p className="text-xs sm:text-sm text-indigo-300 font-medium tracking-widest uppercase">
-                  Creative digital assets for modern brands
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-gradient-to-r from-indigo-500/15 to-fuchsia-500/10 px-4 py-2 backdrop-blur-md">
+                <Sparkles className="h-3.5 w-3.5 text-indigo-200" />
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-indigo-100/90">
+                  Creative Digital Assets for Modern Brands
                 </p>
               </div>
             </motion.div>
 
-            {/* Main headline */}
-            <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Digital assets that make your brand <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">impossible to ignore</span>
+            <motion.h1 variants={itemVariants} className="max-w-[16ch] text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+              Digital assets that make your brand{' '}
+              <span className="bg-gradient-to-r from-cyan-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
+                impossible to ignore.
+              </span>
             </motion.h1>
 
-            {/* Subheading */}
-            <motion.p variants={itemVariants} className="text-base sm:text-lg text-gray-400 leading-relaxed">
-              JustAsk creates premium websites, ads, invitations, flyers, and brand creatives for founders, creators, artists, and businesses who want to look serious online.
+            <motion.p variants={itemVariants} className="max-w-xl text-base leading-relaxed text-gray-300 sm:text-lg">
+              JustAsk creates premium websites, ads, invitations, flyers, and brand creatives for founders, creators,
+              artists, and businesses who want to look serious online.
             </motion.p>
 
-            {/* Tagline */}
-            <motion.p variants={itemVariants} className="text-lg text-purple-300 font-light">
+            <motion.p variants={itemVariants} className="text-base font-light text-violet-200 sm:text-lg">
               Let&apos;s Grow Your Business Together.
             </motion.p>
 
-            {/* CTA Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 pt-1">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white border-0 text-base font-semibold group px-8 py-6"
+                className="group bg-gradient-to-r from-indigo-500 to-violet-500 px-8 py-6 text-base font-semibold text-white hover:from-indigo-400 hover:to-violet-400"
               >
                 Start a Project
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-purple-500/30 text-white hover:bg-purple-500/10 hover:border-purple-400 text-base font-semibold px-8 py-6"
+                className="border-violet-300/35 bg-white/5 px-8 py-6 text-base font-semibold text-white hover:bg-violet-400/10"
               >
                 Explore Services
               </Button>
             </motion.div>
-
-            {/* Feature badges */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-3 pt-4">
-              {[
-                { icon: Globe, label: 'Websites' },
-                { icon: Code2, label: 'Code' },
-                { icon: Palette, label: 'Design' },
-              ].map((item) => (
-                <div key={item.label} className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 backdrop-blur text-xs sm:text-sm">
-                  <item.icon className="w-4 h-4 text-indigo-400" />
-                  <span className="text-white/80">{item.label}</span>
-                </div>
-              ))}
-            </motion.div>
           </motion.div>
 
-          {/* Right side - Website Mockup */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
-            className="relative h-96 sm:h-[500px] lg:h-[550px] hidden lg:block"
+            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.75, delay: 0.15, ease: 'easeOut' }}
+            className="relative mx-auto w-full max-w-[660px] lg:mx-0"
           >
-            {/* Outer glow effect */}
-            <div className="absolute -inset-4 bg-gradient-to-br from-indigo-600/30 via-purple-600/30 to-pink-600/30 rounded-2xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity" />
-
-            {/* Main mockup card */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-2xl backdrop-blur-xl shadow-2xl overflow-hidden">
-              {/* Browser chrome */}
-              <div className="h-14 bg-gradient-to-r from-white/5 to-white/[0.02] border-b border-white/10 flex items-center px-4 gap-3">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                </div>
-                <div className="text-xs text-white/40 font-mono ml-4">https://justask.studio</div>
-              </div>
-
-              {/* Content area with realistic mockup */}
-              <div className="h-full bg-gradient-to-br from-indigo-950/30 via-purple-950/10 to-transparent p-6 space-y-4 overflow-hidden">
-                {/* Header section */}
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500/40 to-purple-500/40 border border-indigo-400/30" />
-                    <div className="h-3 w-24 bg-gradient-to-r from-indigo-500/50 to-transparent rounded-full" />
-                  </div>
-                  <div className="h-2.5 w-40 bg-gradient-to-r from-purple-400/40 to-transparent rounded-full" />
-                </div>
-
-                {/* Content blocks */}
-                <div className="space-y-3 pt-2">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="h-20 bg-gradient-to-br from-indigo-500/20 to-transparent rounded-lg border border-indigo-400/20 flex items-center justify-center">
-                      <div className="text-xs text-indigo-300/60">Asset 1</div>
-                    </div>
-                    <div className="h-20 bg-gradient-to-br from-purple-500/20 to-transparent rounded-lg border border-purple-400/20 flex items-center justify-center">
-                      <div className="text-xs text-purple-300/60">Asset 2</div>
-                    </div>
-                  </div>
-                  <div className="h-12 bg-gradient-to-r from-pink-500/20 to-transparent rounded-lg border border-pink-400/20 flex items-center px-3">
-                    <div className="h-2 w-3/4 bg-pink-400/30 rounded-full" />
-                  </div>
-                </div>
-
-                {/* Bottom action area */}
-                <div className="pt-4 space-y-2 border-t border-white/5">
-                  <div className="flex gap-2">
-                    <div className="h-8 flex-1 bg-gradient-to-r from-indigo-600/30 to-transparent rounded border border-indigo-400/20" />
-                    <div className="h-8 w-20 bg-gradient-to-r from-purple-600/30 to-transparent rounded border border-purple-400/20" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating product labels */}
             <motion.div
-              className="absolute -top-4 -right-8 px-4 py-2 bg-indigo-600/80 backdrop-blur border border-indigo-400/50 rounded-lg text-white text-sm font-medium whitespace-nowrap shadow-lg"
               animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3, repeat: Infinity, delay: 0 }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative h-[420px] sm:h-[510px] lg:h-[560px]"
             >
-              Website
-            </motion.div>
+              <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-indigo-500/25 via-violet-500/15 to-cyan-400/20 blur-3xl" />
 
-            <motion.div
-              className="absolute -bottom-4 -left-8 px-4 py-2 bg-purple-600/80 backdrop-blur border border-purple-400/50 rounded-lg text-white text-sm font-medium whitespace-nowrap shadow-lg"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-            >
-              Design System
-            </motion.div>
+              <div className="absolute inset-x-6 top-10 bottom-0 sm:inset-x-8">
+                <WebsiteMockup />
+              </div>
 
-            {/* Floating animation */}
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute inset-0 rounded-2xl"
-            />
+              <motion.div
+                animate={{ y: [0, 9, 0], x: [0, -4, 0] }}
+                transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -left-1 bottom-8 hidden h-[170px] w-[300px] sm:block"
+              >
+                <CodeMockup />
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, -12, 0], x: [0, 4, 0] }}
+                transition={{ duration: 5.8, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -right-1 top-4 hidden h-[235px] w-[250px] sm:block"
+              >
+                <CreativeAssetsMockup />
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 4.6, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute right-6 bottom-3 hidden rounded-2xl border border-white/20 bg-[#121521]/90 p-3 shadow-xl backdrop-blur-md sm:block"
+              >
+                <div className="mb-2 flex items-center justify-between">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/60">Brand Kit</p>
+                  <span className="rounded-md border border-white/15 bg-white/5 px-1.5 py-0.5 text-[9px] text-white/70">v2.1</span>
+                </div>
+                <div className="mb-2 flex gap-1.5">
+                  {['#8B5CF6', '#22D3EE', '#F472B6', '#F8FAFC'].map((color) => (
+                    <span key={color} className="h-5 w-5 rounded-md border border-white/20" style={{ backgroundColor: color }} />
+                  ))}
+                </div>
+                <p className="text-[10px] text-white/80">Inter SemiBold · 16/24</p>
+                <div className="mt-2 flex items-center gap-1.5">
+                  <span className="rounded-md bg-violet-500/80 px-2 py-1 text-[9px] text-white">Primary</span>
+                  <span className="rounded-md border border-white/25 px-2 py-1 text-[9px] text-white/70">Secondary</span>
+                </div>
+                <p className="mt-2 text-[9px] text-white/55">Spacing: 8 / 16 / 24 / 32</p>
+              </motion.div>
+
+              <div className="absolute -bottom-8 left-3 right-3 hidden flex-wrap justify-center gap-2 sm:flex">
+                {serviceChips.map((chip, index) => (
+                  <motion.span
+                    key={chip}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: 0.3 + index * 0.06 }}
+                    className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] text-white/85 backdrop-blur-md"
+                  >
+                    {chip}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden lg:flex"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/50 sm:flex"
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-xs text-gray-500 uppercase tracking-widest">Scroll to explore</p>
-          <div className="w-[2px] h-8 bg-gradient-to-b from-indigo-500 to-transparent" />
+        <p className="text-[10px] uppercase tracking-[0.2em]">Scroll to explore</p>
+        <div className="flex h-10 w-6 items-start justify-center rounded-full border border-white/25 p-1">
+          <Mouse className="h-4 w-4" />
         </div>
       </motion.div>
     </section>
